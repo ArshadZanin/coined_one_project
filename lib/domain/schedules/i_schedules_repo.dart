@@ -13,19 +13,13 @@ class ISchedulesRepo {
   }) async {
     try {
       var dio = Dio();
-      Response response = await dio.post('${Constants.apiLink}/save/schedule',
+      Response response = await dio.post('https://alpha.classaccess.io/api/challenge/v1/save/schedule',
           data: {
             "name": name,
             "startTime": startTime,
             "endTime": endTime,
             "date": date
           });
-      print({
-        "name": name,
-        "startTime": startTime,
-        "endTime": endTime,
-        "date": date
-      });
 
       if (response.statusCode == 200) {
         Map data = response.data;
@@ -47,7 +41,7 @@ class ISchedulesRepo {
     try {
       var dio = Dio();
       Response response = await dio.get(
-        '${Constants.apiLink}/schedule',
+        'https://alpha.classaccess.io/api/challenge/v1/schedule',
       );
       if (response.statusCode == 200) {
         Map data = response.data;
@@ -63,9 +57,6 @@ class ISchedulesRepo {
       } else {
         print(response.statusCode);
       }
-    } on DioError {
-      print('dio error');
-      return null;
     } catch (e) {
       print(e);
       return null;

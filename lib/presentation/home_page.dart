@@ -59,16 +59,16 @@ class HomePage extends StatelessWidget {
                           color: Colors.black,
                         ),
                       ),
-                     const  SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(
                         DateFormat('MMMM yyyy')
                             .format(selectedDate.value)
                             .toUpperCase(),
-                        style:const  TextStyle(color: Colors.black),
+                        style: const TextStyle(color: Colors.black),
                       ),
-                     const  SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       IconButton(
@@ -173,155 +173,175 @@ class HomePage extends StatelessWidget {
                         },
                       ),
                     ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.grey[200],
-                        ),
-                        padding: const EdgeInsets.all(16),
-                        child: ListView.separated(
-                          primary: true,
-                          // physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.schedules
-                              .where((element) =>
-                                  element.date ==
-                                  DateFormat('dd/MM/yyyy')
-                                      .format(selectedDate.value))
-                              .length,
-                          itemBuilder: (context, index) {
-                            String selectedDay = DateFormat('dd/MM/yyyy')
-                                .format(selectedDate.value);
-                            DateTime startTime = DateTime(
-                              DateTime.now().year,
-                              DateTime.now().month,
-                              DateTime.now().day,
-                              int.parse(
-                                  schedules[index].startTime!.split(':').first),
-                              // DateTime.now().minute,
-                              int.parse(schedules[index]
-                                  .startTime!
-                                  .split(':')[1]
-                                  .substring(0, 1)),
-                            );
-                            DateTime endTime = DateTime(
-                              DateTime.now().year,
-                              DateTime.now().month,
-                              DateTime.now().day,
-                              int.parse(
-                                  schedules[index].endTime!.split(':').first),
-                              // DateTime.now().minute,
-                              int.parse(schedules[index]
-                                  .endTime!
-                                  .split(':')[1]
-                                  .substring(0, 1)),
-                            );
+                    schedules.isEmpty
+                        ? Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.grey[200],
+                              ),
+                              padding: const EdgeInsets.all(16),
+                              child: const Center(
+                                child: Text('No Schedules!'),
+                              ),
+                            ),
+                          )
+                        : Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.grey[200],
+                              ),
+                              padding: const EdgeInsets.all(16),
+                              child: ListView.separated(
+                                primary: true,
+                                // physics: const NeverScrollableScrollPhysics(),
+                                itemCount: state.schedules
+                                    .where((element) =>
+                                        element.date ==
+                                        DateFormat('dd/MM/yyyy')
+                                            .format(selectedDate.value))
+                                    .length,
+                                itemBuilder: (context, index) {
+                                  String selectedDay = DateFormat('dd/MM/yyyy')
+                                      .format(selectedDate.value);
+                                  DateTime startTime = DateTime(
+                                    DateTime.now().year,
+                                    DateTime.now().month,
+                                    DateTime.now().day,
+                                    int.parse(schedules[index]
+                                        .startTime!
+                                        .split(':')
+                                        .first),
+                                    // DateTime.now().minute,
+                                    int.parse(schedules[index]
+                                        .startTime!
+                                        .split(':')[1]
+                                        .substring(0, 1)),
+                                  );
+                                  DateTime endTime = DateTime(
+                                    DateTime.now().year,
+                                    DateTime.now().month,
+                                    DateTime.now().day,
+                                    int.parse(schedules[index]
+                                        .endTime!
+                                        .split(':')
+                                        .first),
+                                    // DateTime.now().minute,
+                                    int.parse(schedules[index]
+                                        .endTime!
+                                        .split(':')[1]
+                                        .substring(0, 1)),
+                                  );
 
-                            return Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      // print(state.schedules
-                                      //     .where((element) =>
-                                      //         element.date ==
-                                      //         DateFormat('dd/MM/yyyy')
-                                      //             .format(selectedDate.value))
-                                      //     .toList()[index]
-                                      //     .startTime!
-                                      //     .split(':')[1]);
-                                      // print(state.schedules
-                                      //     .where((element) =>
-                                      //         element.date ==
-                                      //         DateFormat('dd/MM/yyyy')
-                                      //             .format(selectedDate.value))
-                                      //     .toList()[index]
-                                      //     .endTime!
-                                      //     .split(':')[1]);
-                                    },
-                                    child: AnimatedContainer(
-                                      duration:
-                                          const Duration(milliseconds: 400),
-                                      padding: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.blue,
-                                          width: 1,
+                                  return Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            // print(state.schedules
+                                            //     .where((element) =>
+                                            //         element.date ==
+                                            //         DateFormat('dd/MM/yyyy')
+                                            //             .format(selectedDate.value))
+                                            //     .toList()[index]
+                                            //     .startTime!
+                                            //     .split(':')[1]);
+                                            // print(state.schedules
+                                            //     .where((element) =>
+                                            //         element.date ==
+                                            //         DateFormat('dd/MM/yyyy')
+                                            //             .format(selectedDate.value))
+                                            //     .toList()[index]
+                                            //     .endTime!
+                                            //     .split(':')[1]);
+                                          },
+                                          child: AnimatedContainer(
+                                            duration: const Duration(
+                                                milliseconds: 400),
+                                            padding: const EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: Colors.blue,
+                                                width: 1,
+                                              ),
+                                              shape: BoxShape.circle,
+                                              color: Colors.white,
+                                            ),
+                                            child: const Center(
+                                              child: Icon(
+                                                Icons.calendar_today_outlined,
+                                                color: Colors.blue,
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                        shape: BoxShape.circle,
-                                        color: Colors.white,
                                       ),
-                                      child: const Center(
-                                        child: Icon(
-                                          Icons.calendar_today_outlined,
-                                          color: Colors.blue,
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                '${DateFormat('hh:mm aa').format(startTime)} - ${DateFormat('hh:mm aa').format(endTime)}',
+                                              ),
+                                              Text(
+                                                schedules[index].name!,
+                                                style: const TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
+                                    ],
+                                  );
+                                },
+                                separatorBuilder: (context, index) => Align(
+                                  alignment: Alignment.centerLeft,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 24.0),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        Text(
-                                          '${DateFormat('hh:mm aa').format(startTime)} - ${DateFormat('hh:mm aa').format(endTime)}',
+                                        Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 5, vertical: 3),
+                                          height: 5,
+                                          width: 3,
+                                          color: Colors.blue,
                                         ),
-                                        Text(
-                                          schedules[index].name!,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
+                                        Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 5, vertical: 3),
+                                          height: 5,
+                                          width: 3,
+                                          color: Colors.blue,
+                                        ),
+                                        Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 5, vertical: 3),
+                                          height: 5,
+                                          width: 3,
+                                          color: Colors.blue,
                                         ),
                                       ],
                                     ),
                                   ),
                                 ),
-                              ],
-                            );
-                          },
-                          separatorBuilder: (context, index) => Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 24.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 3),
-                                    height: 5,
-                                    width: 3,
-                                    color: Colors.blue,
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 3),
-                                    height: 5,
-                                    width: 3,
-                                    color: Colors.blue,
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 3),
-                                    height: 5,
-                                    width: 3,
-                                    color: Colors.blue,
-                                  ),
-                                ],
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
                     // BlocBuilder<BottomSheetBloc, BottomSheetState>(
                     //   builder: (context, state) {
                     //     return state.showBottomSheet
